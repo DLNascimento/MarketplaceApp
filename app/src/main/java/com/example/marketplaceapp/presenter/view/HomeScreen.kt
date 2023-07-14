@@ -3,6 +3,8 @@ package com.example.marketplaceapp.presenter.view
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ConcatAdapter
@@ -30,7 +32,6 @@ class HomeScreen : Fragment() {
     ): View? {
 
         _binding = FragmentHomeScreenBinding.inflate(inflater, container, false)
-
         val homeAdapter = HomeHeaderAdapter()
         val horizontalAdapter = HorizontalAdapter()
         val newArrivalAdapter = NewArrivalAdapter(NewArrivalList.mock())
@@ -51,5 +52,4 @@ class HomeScreen : Fragment() {
 
         return binding.root
     }
-
 }

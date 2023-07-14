@@ -5,4 +5,5 @@
     <color name="gray1">#F0F0F0</color>
     <color name="gray3">#CCCCCC</color>
     <color name="green1">#159954</color>
+    <color name="iconTint">#242424</color>
 </resources>
