@@ -1,38 +1,53 @@
 package com.example.marketplaceapp.presenter.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
+import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.marketplaceapp.R
+import coil.load
+import com.example.marketplaceapp.databinding.ListArrivalBinding
 import com.example.marketplaceapp.model.NewArrivalList
 
-class NewArrivalAdapter(
-    private val newArrivalList: MutableList<NewArrivalList>,
-) : RecyclerView.Adapter<NewArrivalAdapter.MyViewHolder>() {
+class NewArrivalAdapter : RecyclerView.Adapter<NewArrivalAdapter.MyViewHolder>() {
+
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val itemView =
-            LayoutInflater.from(parent.context).inflate(R.layout.list_arrival, parent, false)
-        return MyViewHolder(itemView)
+        return MyViewHolder(ListArrivalBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
-    override fun getItemCount(): Int = newArrivalList.size
+    override fun getItemCount(): Int = newArrival.size
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        val item = newArrival[position]
+        holder.binding.apply {
+            shoesTitle.text = item.shoesTitle
+            shoesPrice.text = item.shoesPrice
 
-        holder.shoesTitle.text = newArrivalList[position].shoesTitle
-        holder.shoesPrice.text = newArrivalList[position].shoesPrice
-        holder.imgShoes.setImageResource(newArrivalList[position].shoesImage)
-
+            imgArrival.load(item.shoesImage){
+                crossfade(true)
+            }
+        }
     }
 
-    class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val shoesTitle : TextView = itemView.findViewById(R.id.shoesTitle)
-        val shoesPrice: TextView = itemView.findViewById(R.id.shoesPrice)
-        val imgShoes : ImageView = itemView.findViewById(R.id.img_arrival)
+    inner class MyViewHolder(val binding: ListArrivalBinding) : RecyclerView.ViewHolder(binding.root)
+
+    private val differCallBack = object : DiffUtil.ItemCallback<NewArrivalList>(){
+        override fun areItemsTheSame(oldItem: NewArrivalList, newItem: NewArrivalList): Boolean {
+            return oldItem == newItem
+        }
+
+        override fun areContentsTheSame(oldItem: NewArrivalList, newItem: NewArrivalList): Boolean {
+            return oldItem.shoesTitle == newItem.shoesTitle && oldItem.shoesPrice == newItem.shoesPrice
+                    && oldItem.shoesImage == newItem.shoesImage
+        }
     }
+
+
+    private val differ = AsyncListDiffer(this, differCallBack)
+    var newArrival : List<NewArrivalList>
+        get() = differ.currentList
+        set(value) = differ.submitList(value)
 
 }

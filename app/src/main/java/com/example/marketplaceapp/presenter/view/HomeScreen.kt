@@ -28,7 +28,7 @@ class HomeScreen : Fragment() {
 
     private val homeAdapter = HomeHeaderAdapter()
     private val horizontalAdapter = HorizontalAdapter()
-    private val newArrivalAdapter = NewArrivalAdapter(NewArrivalList.mock())
+    private val newArrivalAdapter = NewArrivalAdapter()
     private var concatAdapter = ConcatAdapter(homeAdapter, HeaderTitleAdapter("Brand"), horizontalAdapter, HeaderTitleAdapter("New Arrival"), newArrivalAdapter)
 
     private val viewModel: HomeViewModel by viewModels()
@@ -75,6 +75,8 @@ class HomeScreen : Fragment() {
                         homeAdapter.description = values.cardProduct.description
                         homeAdapter.buttonTitle = values.cardProduct.buttonTitle
                         homeAdapter.imageUrl = values.cardProduct.imageUrl
+
+                        newArrivalAdapter.newArrival = values.items.map { NewArrivalList(it.title, it.price, it.imageUrl) }
 
                         concatAdapter.notifyDataSetChanged()
 
