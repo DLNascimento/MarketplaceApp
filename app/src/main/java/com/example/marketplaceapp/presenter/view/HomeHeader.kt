@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.widget.LinearLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import com.example.marketplaceapp.R
+import dagger.hilt.android.AndroidEntryPoint
+
 
 class HomeHeader : LinearLayout {
 

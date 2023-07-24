@@ -7,6 +7,8 @@ import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import com.example.marketplaceapp.R
+import dagger.hilt.android.AndroidEntryPoint
+
 
 class CardProduct : ConstraintLayout {
     constructor(context: Context) : super(context)
