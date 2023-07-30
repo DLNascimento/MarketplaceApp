@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.marketplaceapp.databinding.FragmentHomeScreenBinding
 import com.example.marketplaceapp.helper.StateView
+import com.example.marketplaceapp.model.BrandList
 import com.example.marketplaceapp.model.NewArrivalList
 import com.example.marketplaceapp.presenter.adapter.HeaderTitleAdapter
 import com.example.marketplaceapp.presenter.adapter.HomeHeaderAdapter
@@ -77,6 +78,9 @@ class HomeScreen : Fragment() {
                         homeAdapter.imageUrl = values.cardProduct.imageUrl
 
                         newArrivalAdapter.newArrival = values.items.map { NewArrivalList(it.title, it.price, it.imageUrl) }
+
+                        val brandList = values.brands.map { BrandList(it.imageUrl) }
+                        horizontalAdapter.setBrandList(brandList)
 
                         concatAdapter.notifyDataSetChanged()
 

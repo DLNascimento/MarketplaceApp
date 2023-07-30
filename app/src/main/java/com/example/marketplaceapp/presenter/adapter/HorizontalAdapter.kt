@@ -10,12 +10,13 @@ import com.example.marketplaceapp.model.BrandList
 
 class HorizontalAdapter : RecyclerView.Adapter<HorizontalAdapter.MyViewHolder>() {
 
+    val brandAdapter = BrandAdapter()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val itemView = LayoutInflater.from(parent.context)
             .inflate(R.layout.horizontal_recyclerview, parent, false)
         val recyclerView = itemView.findViewById<RecyclerView>(R.id.rv_horizontal)
-        recyclerView.adapter = BrandAdapter(BrandList.mock())
+        recyclerView.adapter = brandAdapter
         recyclerView.layoutManager = LinearLayoutManager(parent.context, LinearLayoutManager.HORIZONTAL, false)
         return MyViewHolder(itemView)
     }
@@ -28,6 +29,10 @@ class HorizontalAdapter : RecyclerView.Adapter<HorizontalAdapter.MyViewHolder>()
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
+    }
+
+    fun setBrandList(brandList: List<BrandList>){
+        brandAdapter.brandList = brandList
     }
 
 }
