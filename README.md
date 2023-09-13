@@ -7,3 +7,5 @@ Esse aplicativo foi criado com o foco de melhorar e treinar as minhas habilidade
 - Dagger Hilt
 - ConcatAdapter
 - Material Design
+- Retrofit
+- Coil
